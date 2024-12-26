@@ -9,8 +9,9 @@ CREATE TABLE "courses" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
-    "image" TEXT NOT NULL,
+    "image" TEXT,
     "courseType" "CourseType" NOT NULL,
+    "authors" TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -26,6 +27,7 @@ CREATE TABLE "chapters" (
     "image" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "coursesId" TEXT,
 
     CONSTRAINT "chapters_pkey" PRIMARY KEY ("id")
 );
@@ -66,6 +68,12 @@ CREATE TABLE "chunks" (
 
     CONSTRAINT "chunks_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "courses_name_key" ON "courses"("name");
+
+-- AddForeignKey
+ALTER TABLE "chapters" ADD CONSTRAINT "chapters_coursesId_fkey" FOREIGN KEY ("coursesId") REFERENCES "courses"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "lessons" ADD CONSTRAINT "lessons_chaptersId_fkey" FOREIGN KEY ("chaptersId") REFERENCES "chapters"("id") ON DELETE SET NULL ON UPDATE CASCADE;

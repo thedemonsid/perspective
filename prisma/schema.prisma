@@ -20,12 +20,16 @@ enum CourseType {
 
 model Courses {
   id          String     @id @default(cuid())
-  name        String
+  name        String     @unique
   description String?
-  image       String
+  image       String?
   courseType  CourseType
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  authors     String[]
+
+  chapters Chapters[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("courses")
 }
@@ -41,6 +45,9 @@ model Chapters {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  Courses   Courses? @relation(fields: [coursesId], references: [id])
+  coursesId String?
 
   @@map("chapters")
 }
