@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CourseType {
+  FREE
+  PAID
+}
+
+model Courses {
+  id          String     @id @default(cuid())
+  name        String
+  description String?
+  image       String
+  courseType  CourseType
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("courses")
+}
+
+model Chapters {
+  id          String  @id @default(cuid())
+  sequence    Int //* Sequence of the chapter in the course
+  name        String
+  description String?
+  image       String
+
+  lessons Lessons[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("chapters")
+}
+
+model Lessons {
+  id          String  @id @default(cuid())
+  sequence    Int //* Sequence of the lesson in the chapter
+  name        String
+  description String?
+
+  cards Cards[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Chapters   Chapters? @relation(fields: [chaptersId], references: [id])
+  chaptersId String?
+
+  @@map("lessons")
+}
+
+model Cards {
+  id       String   @id @default(cuid())
+  sequence Int //* Sequence of the card in the lesson
+  chunks   Chunks[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Lessons   Lessons? @relation(fields: [lessonsId], references: [id])
+  lessonsId String?
+
+  @@map("cards")
+}
+
+enum ChunkType {
+  TITLE
+  TEXT
+  PARAGRAPH
+  QUESTION
+  IMAGE
+  VIDEO
+  AUDIO
+  CODE
+  SIMULATION //* This will be used for interactive simulations with the help of iframes
+  QUIZ //! Quiz will be stored in the content field with the help of JSON.stringify()
+}
+
+model Chunks {
+  id        String    @id @default(cuid())
+  sequence  Int //* Sequence of the chunk in the card
+  chunkType ChunkType
+  content   String //* Content of the chunk
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Cards   Cards?  @relation(fields: [cardsId], references: [id])
+  cardsId String?
+
+  @@map("chunks")
+}
