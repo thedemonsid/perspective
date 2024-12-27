@@ -13,4 +13,13 @@ export interface BaseChunk {
   sequence: number;
   title: string;
   content: string;
+  quiz?: {
+    question: string;
+    options: string[];
+    correct: number;
+  };
+  media?: {
+    url: string;
+    caption: string;
+  };
 }
