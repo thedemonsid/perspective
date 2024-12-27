@@ -1,4 +1,4 @@
-import NounsLesson from "@/components/LessonChunks/NounLessons";
+import NounsLesson from "@/components/lesson-chunks/noun-lessons";
 
 export default function Home() {
   return (

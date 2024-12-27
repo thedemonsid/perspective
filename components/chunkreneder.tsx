@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 "use client";
-
-import { Title } from "@/components/chunks/titlechunk";
-import { Text } from "@/components/chunks/textchunk";
-import { ImageChunk } from "@/components/chunks/imagechunk";
-import { Video } from "@/components/chunks/videochunk";
-import { Quiz } from "@/components/chunks/quizchunk";
-import { Simulation } from "@/components/chunks/simulchunk";
+import { Title } from "@/components/chunks/title-chunk";
+import { Text } from "@/components/chunks/text-chunk";
+import { ImageChunk } from "@/components/chunks/image-chunk";
+import { Video } from "@/components/chunks/video-chunk";
+import { Quiz } from "@/components/chunks/quiz-chunk";
+import { Simulation } from "@/components/chunks/simul-chunk";
 import { BaseChunk, ChunkType } from "@/temptypes/chunks";
 
 const chunkComponents = {
