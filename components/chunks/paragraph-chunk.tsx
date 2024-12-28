@@ -1,11 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-"use client";
+import { ChunkProps } from "@/types";
 
-interface ParagraphProps {
-  content: string;
-  sequence: number;
-}
-
-export function Paragraph({ content, sequence }: ParagraphProps) {
-  return <p className="text-base mb-4">{content}</p>;
-}
+export const renderParagraph = (chunk: ChunkProps) => (
+  <p className="text-gray-700">{chunk.content}</p>
+);

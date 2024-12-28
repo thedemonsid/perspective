@@ -1,8 +1,5 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import prisma from "@/lib/prisma";
-import Image from "next/image";
-import CardComponent from "@/components/chunks/global-chunk";
+import CardComponent from "@/components/chunk-reneder";
 
 const Lesson = async ({
   params,
@@ -35,9 +32,9 @@ const Lesson = async ({
   }
 
   return (
-    <div className="container  p-4">
-      <div className="bg-white shadow-md rounded-lg p-2">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+    <div className="max-w-lg mx-auto py-4">
+      <div className="bg-white rounded-lg p-2">
+        <div className="flex flex-col justify-center gap-2">
           {lesson.cards.map((card) => (
             <CardComponent key={card.id} card={card} />
           ))}

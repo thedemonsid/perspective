@@ -1,19 +1,12 @@
-"use client";
+import { ChunkProps } from "@/types";
 import Image from "next/image";
-interface ImageProps {
-  content: string; // URL of the image
-  sequence: number;
-}
 
-export function ImageChunk({ content, sequence }: ImageProps) {
-  return (
-    <Image
-      src={content}
-      alt={`Content image ${sequence}`}
-      width={800}
-      height={600}
-      className="max-w-full h-auto rounded-lg my-4"
-      priority={sequence === 1}
-    />
-  );
-}
+export const renderImage = (chunk: ChunkProps) => (
+  <Image
+    src={chunk.content}
+    alt="Chunk Image"
+    width={800}
+    height={400}
+    className="w-full h-48 object-cover rounded-md"
+  />
+);

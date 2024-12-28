@@ -1,15 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-"use client";
+import { ChunkProps } from "@/types";
 
-interface QuestionProps {
-  content: string;
-  sequence: number;
-}
-
-export function Question({ content, sequence }: QuestionProps) {
-  return (
-    <div className="bg-neutral-100 p-4 rounded-lg mb-4">
-      <p className="font-semibold">{content}</p>
-    </div>
-  );
-}
+export const renderQuestion = (chunk: ChunkProps) => (
+  <p className="text-gray-700 font-semibold">{chunk.content}</p>
+);

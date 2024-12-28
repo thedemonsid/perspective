@@ -1,11 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-"use client";
+import { ChunkProps } from "@/types";
 
-interface TitleProps {
-  content: string;
-  sequence: number;
-}
-
-export function Title({ content, sequence }: TitleProps) {
-  return <h2 className="text-2xl font-bold mb-4">{content}</h2>;
-}
+export const renderTitle = (chunk: ChunkProps) => (
+  <h3 className="text-2xl font-bold">{chunk.content}</h3>
+);

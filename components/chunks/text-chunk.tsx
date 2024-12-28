@@ -1,12 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ChunkProps } from "@/types";
 
-"use client";
-
-interface TextProps {
-  content: string;
-  sequence: number;
-}
-
-export function Text({ content, sequence }: TextProps) {
-  return <span className="text-base">{content}</span>;
-}
+export const renderText = (chunk: ChunkProps) => (
+  <p className="text-gray-700">{chunk.content}</p>
+);
