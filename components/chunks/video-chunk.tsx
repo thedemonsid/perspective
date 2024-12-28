@@ -6,7 +6,7 @@ const getYouTubeEmbedUrl = (url: string): string | null => {
   const videoId = videoIdMatch ? videoIdMatch[1] : null;
   return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 };
-export const renderVideo = (chunk: ChunkProps) => (
+export const Video = ({ chunk }: { chunk: ChunkProps }) => (
   <iframe
     width="560"
     height="315"

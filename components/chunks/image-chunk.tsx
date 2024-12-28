@@ -1,7 +1,7 @@
 import { ChunkProps } from "@/types";
 import Image from "next/image";
 
-export const renderImage = (chunk: ChunkProps) => (
+export const ImageComponent = ({chunk}:{chunk:ChunkProps}) => (
   <Image
     src={chunk.content}
     alt="Chunk Image"

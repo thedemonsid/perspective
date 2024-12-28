@@ -1,40 +1,39 @@
 import React from "react";
 import { Card, CardContent } from "./ui/card";
-import Image from "next/image";
-import { renderTitle } from "./chunks/title-chunk";
-import { renderText } from "./chunks/text-chunk";
-import { renderParagraph } from "./chunks/paragraph-chunk";
-import { renderQuestion } from "./chunks/question-chunk";
-import { renderImage } from "./chunks/image-chunk";
-import { renderVideo } from "./chunks/video-chunk";
-import { renderAudio } from "./chunks/audio-chunk";
-import { renderCode } from "./chunks/code-chunk";
-import { renderSimulation } from "./chunks/simul-chunk";
-import { renderQuiz } from "./chunks/quiz-chunk";
+import { Title } from "./chunks/title-chunk";
+import { Text } from "./chunks/text-chunk";
+import { Paragraph } from "./chunks/paragraph-chunk";
+import { Question } from "./chunks/question-chunk";
+import { ImageComponent } from "./chunks/image-chunk";
+import { Video } from "./chunks/video-chunk";
+import { Audio } from "./chunks/audio-chunk";
+import { Code } from "./chunks/code-chunk";
+import { Simulation } from "./chunks/simul-chunk";
+import { Quiz } from "./chunks/quiz-chunk";
 import { CardProps, ChunkProps } from "@/types";
 
 const renderChunk = (chunk: ChunkProps) => {
   switch (chunk.chunkType) {
     case "TITLE":
-      return renderTitle(chunk);
+      return <Title chunk={chunk}></Title>;
     case "TEXT":
-      return renderText(chunk);
+      return <Text chunk={chunk}></Text>;
     case "PARAGRAPH":
-      return renderParagraph(chunk);
+      return <Paragraph chunk={chunk}></Paragraph>;
     case "QUESTION":
-      return renderQuestion(chunk);
+      return <Question chunk={chunk}></Question>;
     case "IMAGE":
-      return renderImage(chunk);
+      return <ImageComponent chunk={chunk}></ImageComponent>;
     case "VIDEO":
-      return renderVideo(chunk);
+      return <Video chunk={chunk}></Video>;
     case "AUDIO":
-      return renderAudio(chunk);
+      return <Audio chunk={chunk}></Audio>;
     case "CODE":
-      return renderCode(chunk);
+      return <Code chunk={chunk}></Code>;
     case "SIMULATION":
-      return renderSimulation(chunk);
+      return <Simulation chunk={chunk}></Simulation>;
     case "QUIZ":
-      return renderQuiz(chunk);
+      return <Quiz chunk={chunk}></Quiz>;
     default:
       return null;
   }
