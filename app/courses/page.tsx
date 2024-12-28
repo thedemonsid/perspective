@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
+import Image from "next/image";
 
 const Courses = async () => {
   const courses = await prisma.courses.findMany();
@@ -24,9 +25,11 @@ const Courses = async () => {
           </CardHeader>
           <CardContent>
             {course.image && (
-              <img
+              <Image
                 src={course.image}
                 alt={course.name}
+                width={800}
+                height={400}
                 className="w-full h-48 object-cover rounded-md mb-4"
               />
             )}

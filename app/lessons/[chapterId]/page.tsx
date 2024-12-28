@@ -9,8 +9,8 @@ import {
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 
-const Chapter = async ({ params }: { params: { chapterId: string } }) => {
-  const { chapterId } = params;
+const Chapter = async ({ params }: { params: Promise<{ chapterId: string }> }) => {
+  const { chapterId } = await params;
   const chapter = await prisma.chapters.findUnique({
     where: {
       id: chapterId,
