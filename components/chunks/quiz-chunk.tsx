@@ -20,14 +20,15 @@ type QuizProps = {
   why: string;
 };
 
-const demoQuiz: QuizProps = {
-  question: "What is the capital of France?",
-  options: ["Paris", "London", "Berlin", "Madrid"],
-  answer: 0,
-  why: "Paris is the capital of France.",
-};
-
 export const Quiz = ({ chunk }: { chunk: ChunkProps }) => {
+  let quiz: QuizProps;
+  try {
+    // Ensure the content is a valid JSON string
+    quiz = JSON.parse(chunk.content.trim());
+  } catch (error) {
+    console.error("Failed to parse quiz content:", error);
+    return <div>{chunk.content}</div>;
+  }
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -51,13 +52,11 @@ export const Quiz = ({ chunk }: { chunk: ChunkProps }) => {
   return (
     <Card className="w-full max-w-md mx-auto bg-gray-100">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold">
-          {demoQuiz.question}
-        </CardTitle>
+        <CardTitle className="text-2xl font-bold">{quiz.question}</CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="space-y-2">
-          {demoQuiz.options.map((option, index) => (
+          {quiz.options.map((option, index) => (
             <motion.li
               key={index}
               whileHover={{ scale: 1.02 }}
@@ -66,23 +65,23 @@ export const Quiz = ({ chunk }: { chunk: ChunkProps }) => {
               <Button
                 variant={selectedOption === index ? "secondary" : "outline"}
                 className={`w-full justify-start text-left ${
-                  showAnswer && index === demoQuiz.answer
+                  showAnswer && index === quiz.answer
                     ? "bg-green-100 hover:bg-green-200"
                     : showAnswer &&
                       index === selectedOption &&
-                      index !== demoQuiz.answer
+                      index !== quiz.answer
                     ? "bg-red-100 hover:bg-red-200"
                     : ""
                 }`}
                 onClick={() => handleOptionClick(index)}
               >
                 {option}
-                {showAnswer && index === demoQuiz.answer && (
+                {showAnswer && index === quiz.answer && (
                   <CheckCircle className="ml-auto h-4 w-4 text-green-500" />
                 )}
                 {showAnswer &&
                   index === selectedOption &&
-                  index !== demoQuiz.answer && (
+                  index !== quiz.answer && (
                     <XCircle className="ml-auto h-4 w-4 text-red-500" />
                   )}
               </Button>
@@ -110,7 +109,7 @@ export const Quiz = ({ chunk }: { chunk: ChunkProps }) => {
             transition={{ duration: 0.3 }}
           >
             <CardContent>
-              <p className="mt-4 text-gray-600 italic">{demoQuiz.why}</p>
+              <p className="mt-4 text-gray-600 italic">{quiz.why}</p>
             </CardContent>
           </motion.div>
         )}
